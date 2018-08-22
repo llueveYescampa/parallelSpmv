@@ -1,0 +1,46 @@
+#!/usr/bin/gnuplot
+# call it as:
+# gnuplot -c plot.gnp computer matrixName numberOfProcesses
+#
+computer=ARG1
+matrixName=ARG2
+numberOfProcesses=ARG3+1
+
+set terminal pdf enhanced
+set output computer."_".matrixName.".pdf"
+
+
+load 'style.gnp'
+#set style line 1 dt 1 ps 0.6 lc rgb "#F0F0F0";
+#set style line 2 dt 4 ps 0.5 lc rgb "#ff4500";
+#set style line 3 dt 5 ps 0.5 lc rgb "#ffd700";
+
+set key top left nobox
+set grid
+
+set title "Scalability of parallelSpmv for ".matrixName." in ".computer
+#set title "Spmv comparison in Blue Waters"
+#set label "" at screen 0.5, 0.9 center font "Arial,11"
+#set label  computer at graph 0.5, 1.035 center font "Arial,12"
+
+#set format y "%.2f"
+#set xlabel "Total number of Processors/Threads"
+set ylabel "Time [mS]"
+
+set xrange [-1.5:3.5]
+set yrange [0:]
+set style data histogram
+set style histogram cluster gap 1
+set style fill solid
+set boxwidth 0.90
+set xtics format ""
+set grid ytics
+
+#plot  computer.'/temp.txt' using 2:xtic(1) title "1 Process" ls 1,\
+#      ''                   using 3         title "2 Process" ls 2,\
+#      ''                   using 4         title "3 Process" ls 3,\
+#      ''                   using 5         title "4 Process" ls 1
+
+
+plot for[i=2:numberOfProcesses] computer.'/temp.txt' using i:xtic(1)  title " Process".(i-1)  ls (i-1)
+

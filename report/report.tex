@@ -1,0 +1,110 @@
+\documentclass[pagesize=auto, fontsize=11pt, DIV=11]{scrartcl}
+
+%\usepackage{fixltx2e}
+\usepackage{etex}
+\usepackage{xspace}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[svgnames]{xcolor}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{outline}
+\usepackage{subcaption}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage{courier}
+%\definecolor{backgroundColour}{gray}{0.90}
+\definecolor{backgroundColour}{rgb}{0.95,0.95,0.92}
+
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
+\lstdefinestyle{CStyle}{
+    backgroundcolor=\color{backgroundColour},
+    commentstyle=\color{Green},
+    keywordstyle=\color{Blue},
+    numberstyle=\tiny\color{Gray},
+    stringstyle=\color{Purple},
+    basicstyle=\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=10pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2,                          % sets default tabsize to 2 spaces
+    frame=single,                       % adds a frame around the code
+    rulecolor=\color{black},
+    language=C
+}
+
+
+\newcommand*{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+\newcommand*{\pkg}[1]{\textsf{#1}}
+\newcommand*{\cs}[1]{\texttt{\textbackslash#1}}
+\makeatletter
+\newcommand*{\cmd}[1]{\cs{\expandafter\@gobble\string#1}}
+\makeatother
+\newcommand*{\env}[1]{\texttt{#1}}
+
+\addtokomafont{title}{\rmfamily}
+
+\lstset{%
+  language=[LaTeX]TeX,%
+  columns=flexible,%
+  upquote=true,%
+  numbers=left,%
+  basicstyle=\ttfamily,%
+  keywordstyle=\color{Navy},%
+  commentstyle=\color{DimGray},%
+  stringstyle=\color{SeaGreen},%
+  numberstyle=\scriptsize\color{SlateGray}%
+}
+
+\title{Parallel SPMV}
+\subtitle{Selected matrices and Pure MPI results}
+\author{%
+  Edgar F. Black\thanks{University of Illinois, Department of Computer Science, \mail{efblack2@illinois.edu}}
+}
+\date{DRAFT: \today} % Date
+
+\begin{document}
+
+\maketitle
+
+\noindent
+
+
+\begin{comment}
+
+\begin{quote}
+  \footnotesize
+  The guide will present methods and best practices for efficient use of shared memory in two different contexts: \textbf{hybrid programming} and \textbf{share memory programming}.
+\end{quote}
+\end{comment}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% INSERT REAL CONTENT HERE
+%
+\include{introduction}                      % for SECTION 1    in "introduction.tex"
+%\include{mpi_sm}                            % for SECTION 2    in "mpi_sm.tex"
+%\include{potentialLimitsSharedMemoryModels} % for SECTION 3    in "potentialLimitsSharedMemoryModels.tex"
+%\include{shared_memory_programing}          % for SECTION 4    in "shared_memory_programing.tex"
+%\include{hybrid_programing}                 % for SECTION 5    in "hybrid_programing.tex"
+%\include{conclusion}                        % for CONCLUSION   in "conclusion.tex"
+
+
+%\bibliographystyle{plain}
+%\bibliography{references}
+%\nocite{*}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

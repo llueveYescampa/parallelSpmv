@@ -1,0 +1,30 @@
+# Styles for lines
+#
+set style line 1 dt 1 ps 0.6 lc rgb "#ff0000";
+set style line 2 dt 1 ps 0.6 lc rgb "#0000ff";
+set style line 3 dt 1 ps 0.6 lc rgb "#009900";
+
+set style line 4 dt 1 ps 0.6 lc rgb "#9f129b";
+set style line 5 dt 1 ps 0.6 lc rgb "#00ffff";
+set style line 6 dt 1 ps 0.6 lc rgb "#ffffff";
+
+
+#set style line 2 dt 4 ps 0.5 lc rgb "#ff4f00";
+
+#set style line 4 dt 4 ps 0.5 lc rgb "#00bbff";
+#set style line 5 dt 1 ps 0.6 lc rgb "#00ff00";
+#set style line 6 dt 4 ps 0.5 lc rgb "#00ff99";
+
+#set style line 7 dt 5 ps 0.5 lc rgb "#ff46df";
+#set style line 8 dt 5 ps 0.7 lc rgb "#af55ff";
+#set style line 9 dt 5 ps 0.7 lc rgb "#33ffa9";
+
+#set style line  1 lt 1 lc rgb '#000004' # black
+#set style line  2 lt 1 lc rgb '#1c1044' # dark blue
+#set style line  3 lt 1 lc rgb '#4f127b' # dark purple
+#set style line  4 lt 1 lc rgb '#812581' # purple
+#set style line  5 lt 1 lc rgb '#b5367a' # magenta
+#set style line  6 lt 1 lc rgb '#e55964' # light red
+#set style line  7 lt 1 lc rgb '#fb8761' # orange
+#set style line  8 lt 1 lc rgb '#fec287' # light orange
+#set style line  9 lt 1 lc rgb '#fbfdbf' # light yellow
