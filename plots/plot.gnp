@@ -6,7 +6,7 @@ computer=ARG1
 matrixName=ARG2
 numberOfProcesses=ARG3+1
 
-set terminal pdf enhanced
+set terminal pdf noenhanced
 set output computer."_".matrixName.".pdf"
 
 
@@ -31,7 +31,7 @@ set xrange [-1.5:3.5]
 set yrange [0:]
 set style data histogram
 set style histogram cluster gap 1
-set style fill solid
+set style fill solid 0.30
 set boxwidth 0.90
 set xtics format ""
 set grid ytics
