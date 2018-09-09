@@ -36,11 +36,11 @@ set boxwidth 0.90
 set xtics format ""
 set grid ytics
 
-#plot  computer.'/temp.txt' using 2:xtic(1) title "1 Process" ls 1,\
-#      ''                   using 3         title "2 Process" ls 2,\
-#      ''                   using 4         title "3 Process" ls 3,\
-#      ''                   using 5         title "4 Process" ls 1
+#plot  computer.'/temp.txt' using 2:xtic(1) title "1 Proc." ls 1,\
+#      ''                   using 3         title "2 Proc." ls 2,\
+#      ''                   using 4         title "3 Proc." ls 3,\
+#      ''                   using 5         title "4 Proc." ls 1
 
 
-plot for[i=2:numberOfProcesses] computer.'/temp.txt' using i:xtic(1)  title " Process".(i-1)  ls (i-1)
+plot for[i=2:numberOfProcesses] computer.'/temp.txt' using i:xtic(1)  title "".(i-1)." Proc."  ls (i-1)
 
