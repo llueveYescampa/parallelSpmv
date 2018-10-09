@@ -4,12 +4,13 @@ then
   echo "Usage: $0 matrixName"
   exit 1
 fi
+matrix=$1
 
 cd buildGnu
 make clean
 make -j
 
-../runTest.sh parallelSpmv    $1 gnu
+../runTest.sh parallelSpmv $matrix gnu
 
 cd ../
 
@@ -20,8 +21,7 @@ cd buildIntel
 make clean
 make -j
 
-../runTest.sh parallelSpmv    $1 intel
-
+../runTest.sh parallelSpmv $matrix intel
 
 cd ../
 
@@ -32,7 +32,8 @@ cd buildPgi
 make clean
 make -j
 
-../runTest.sh parallelSpmv    $1 pgi
+../runTest.sh parallelSpmv  $matrix pgi
 
 cd ../
+
 
