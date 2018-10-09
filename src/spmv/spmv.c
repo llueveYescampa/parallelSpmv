@@ -1,6 +1,6 @@
 #include "real.h"
 
-void spmv(real *b, real *__restrict__ val, real *x, int *row_ptr, int *col_idx, int nRows)
+void spmv(real *__restrict__  b, real *__restrict__ val, real *x, int *row_ptr, int *col_idx, int nRows)
 {
     int start, end;
     for (int i=0; i<nRows; ++i) {

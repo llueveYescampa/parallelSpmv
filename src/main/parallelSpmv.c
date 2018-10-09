@@ -105,8 +105,12 @@ int main(int argc, char *argv[])
         spmv(w,val,v, row_ptr,col_idx,n);
         
         // waitting for the comunication to finish
-        MPI_Waitall(countR, requestR,MPI_STATUS_IGNORE);
-        MPI_Waitall(countS, requestS,MPI_STATUS_IGNORE);
+        if (countS > 1) {
+            MPI_Waitall(countS, requestS,MPI_STATUS_IGNORE);
+        } // end if //
+        if (countR > 1) {
+            MPI_Waitall(countR, requestR,MPI_STATUS_IGNORE);
+        } // end if //
 
         // now is time to solve the off_proc part
         if (nColsOff > 0) {

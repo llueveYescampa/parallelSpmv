@@ -16,7 +16,7 @@ if (CMAKE_C_COMPILER_ID STREQUAL "GNU" )
 elseif ( CMAKE_C_COMPILER_ID STREQUAL "Intel" )
     set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -qopt-report=3 -qopt-report-phase=vec -xCORE-AVX2")
 elseif ( CMAKE_C_COMPILER_ID STREQUAL "PGI" )
-    set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Minform=inform -Minfo=all -Mvect=simd -DPGI")
+    set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Minform=inform  -Mnodepchk -Minfo=all -Mvect=simd ")
 endif ( )
 ## end of adding the following lines while cleaning the code
 
