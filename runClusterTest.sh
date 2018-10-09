@@ -17,12 +17,13 @@ if [ "$MPI" == "HYDRA" ]; then
     echo "MPICH"
     bindings="--bind-to socket"
     export HYDRA_TOPO_DEBUG=1
+    export MPIR_CVAR_CH3_PORT_RANGE=10000:10100
 elif [ "$MPI" == "Intel(R)" ]; then
     echo "Intel MPI"
-    bindings="-genv I_MPI_PIN_DOMAIN=socket  -genv I_MPI_PIN_ORDER=scatter  -genv I_MPI_DEBUG=4 -genv I_MPI_FABRICS=shm:tcp"    
+    bindings="-genv I_MPI_PIN_DOMAIN=socket  -genv I_MPI_PIN_ORDER=scatter  -genv I_MPI_DEBUG=4  -genv I_MPI_FABRICS=shm:ofi"
 elif [ "$MPI" == "mpiexec" ]; then
     echo "open-mpi"
-    bindings="--bind-to core --map-by socket  --report-bindings "
+    bindings="--bind-to socket --map-by socket  --report-bindings "
 fi
 # end of Determining MPI implementation and binding options #
 
@@ -48,11 +49,11 @@ for j in  `seq 1 $nloops`; do
     echo run number: $j
     echo  $1  ../matrices/$2".mm_bin" ../matrices/$2".in_bin" 
     if [ "$MPI" == "HYDRA" ]; then
-        mpiexec $bindings  -hosts blackPanther,blackFake -n 4 -ppn 2 $1  ../matrices/$2".mm_bin" ../matrices/$2".in_bin"   ../matrices/$2".out_bin"  | grep taken >>  $tempFilename
+        mpiexec $bindings  -hosts blackPanther,blackEngineering -n 4 -ppn 2 $1  ../matrices/$2".mm_bin" ../matrices/$2".in_bin"   ../matrices/$2".out_bin"  | grep taken >>  $tempFilename
     elif [ "$MPI" == "Intel(R)" ]; then
-        mpiexec $bindings  -hosts blackPanther,blackFake -n 4 -ppn 2 $1  ../matrices/$2".mm_bin" ../matrices/$2".in_bin"   ../matrices/$2".out_bin"  | grep taken >>  $tempFilename    
+        mpiexec $bindings  -hosts blackPanther,blackEngineering -n 4 -ppn 2 $1  ../matrices/$2".mm_bin" ../matrices/$2".in_bin"   ../matrices/$2".out_bin"  | grep taken >>  $tempFilename    
     elif [ "$MPI" == "mpiexec" ]; then
-        mpiexec $bindings  -host blackPanther:2,blackFake:2 -n 4  $1 ../matrices/$2".mm_bin" ../matrices/$2".in_bin"   ../matrices/$2".out_bin"  | grep taken >>  $tempFilename        
+        mpiexec $bindings  -host blackPanther:2,blackEngineering:2 -n 4  $1 ../matrices/$2".mm_bin" ../matrices/$2".in_bin"   ../matrices/$2".out_bin"  | grep taken >>  $tempFilename        
     fi
     
 done
