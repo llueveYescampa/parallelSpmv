@@ -17,7 +17,7 @@ if [ "$MPI" == "HYDRA" ]; then
     echo "MPICH"
     bindings="--bind-to socket"
     export HYDRA_TOPO_DEBUG=1
-    export MPIR_CVAR_CH3_PORT_RANGE=10000:10100
+    #export MPIR_CVAR_CH3_PORT_RANGE=10000:10100
 elif [ "$MPI" == "Intel(R)" ]; then
     echo "Intel MPI"
     bindings="-genv I_MPI_PIN_DOMAIN=socket  -genv I_MPI_PIN_ORDER=scatter  -genv I_MPI_DEBUG=4  -genv I_MPI_FABRICS=shm:ofi"
