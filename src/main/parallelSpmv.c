@@ -87,8 +87,8 @@ int main(int argc, char *argv[])
         if (sendCount[process] > 0 ) ++countS;
     } // end for //
     
-    requestS = (MPI_Request *) malloc( countS*sizeof(MPI_Request));
-    requestR = (MPI_Request *) malloc( countR*sizeof(MPI_Request));
+    if (countS > 1) requestS = (MPI_Request *) malloc( countS*sizeof(MPI_Request));
+    if (countR > 1) requestR = (MPI_Request *) malloc( countR*sizeof(MPI_Request));
 
     // Timing should begin here//
     double elapsed_time;
@@ -105,13 +105,9 @@ int main(int argc, char *argv[])
         spmv(w,val,v, row_ptr,col_idx,n);
         
         // waitting for the comunication to finish
-        if (countS > 1) {
-            MPI_Waitall(countS, requestS,MPI_STATUS_IGNORE);
-        } // end if //
-        if (countR > 1) {
-            MPI_Waitall(countR, requestR,MPI_STATUS_IGNORE);
-        } // end if //
-
+        if (countS > 1) MPI_Waitall(countS, requestS,MPI_STATUS_IGNORE);
+        if (countR > 1) MPI_Waitall(countR, requestR,MPI_STATUS_IGNORE);
+        
         // now is time to solve the off_proc part
         if (nColsOff > 0) {
             spmv(w,val_off,v_off, row_ptr_off,col_idx_off,n);
