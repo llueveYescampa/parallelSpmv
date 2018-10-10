@@ -15,7 +15,7 @@ load 'style.gnp'
 #set style line 2 dt 4 ps 0.5 lc rgb "#ff4500";
 #set style line 3 dt 5 ps 0.5 lc rgb "#ffd700";
 
-set key top left nobox
+set key top right nobox
 set grid
 
 set title "Scalability of parallelSpmv for ".matrixName." in ".computer
