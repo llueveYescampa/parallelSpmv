@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
     } // end for //
     
     if (countS > 0) requestS = (MPI_Request *) malloc( countS*sizeof(MPI_Request));
-    if (countS > 0) requestR = (MPI_Request *) malloc( countR*sizeof(MPI_Request));
+    if (countR > 0) requestR = (MPI_Request *) malloc( countR*sizeof(MPI_Request));
 
     // Timing should begin here//
     double elapsed_time;
