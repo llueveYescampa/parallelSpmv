@@ -5,7 +5,7 @@
 #include "real.h"
 
 #include "parallelSpmv.h"
-#define REP 100
+#define REP 1000
 
 int main(int argc, char *argv[]) 
 {
@@ -81,13 +81,14 @@ int main(int argc, char *argv[])
     // reading input vector
     vectorReader(v, &n, argv[2]);
     
-    int countR=0;
+    int countR=0, countS=0;
     for (int process=0; process<worldSize; ++process) {
         if (recvCount[process] > 0 ) ++countR;
+        if (sendCount[process] > 0 ) ++countS;
     } // end for //
     
-    //if (countS > 0) requestS = (MPI_Request *) malloc( countS*sizeof(MPI_Request));
-    if (countR > 0) requestR = (MPI_Request *) malloc( countR*sizeof(MPI_Request));
+    if (countS > 0) requestS = (MPI_Request *) malloc( countS*sizeof(MPI_Request));
+    if (countS > 0) requestR = (MPI_Request *) malloc( countR*sizeof(MPI_Request));
 
     // Timing should begin here//
     double elapsed_time;
@@ -98,13 +99,13 @@ int main(int argc, char *argv[])
         // cleaning solution vector //
         for(int i=0; i<n; ++i) w[i] = 0.0;
 
-        startComunication(v,v_off,compressedVec,recvCount, sendCount, sendColumns,requestR);
+        startComunication(v,v_off,compressedVec,recvCount, sendCount, sendColumns, requestS,requestR);
 
         // solving the on_proc part while comunication is taken place.
         spmv(w,val,v, row_ptr,col_idx,n);
         
         // waitting for the comunication to finish
-        //MPI_Waitall(countS, requestS,MPI_STATUS_IGNORE);
+        MPI_Waitall(countS, requestS,MPI_STATUS_IGNORE);
         MPI_Waitall(countR, requestR,MPI_STATUS_IGNORE);
         
         // now is time to solve the off_proc part

@@ -8,6 +8,7 @@
     free(compressedVec);
     free(sendColumns);
 
+    free(requestS);
     free(requestR);
     
     free(row_ptr);

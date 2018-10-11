@@ -23,6 +23,7 @@ void startComunication(real *v,
                        const int *recvCount,
                        const int *sendCount, 
                        int **sendColumns, 
+                       MPI_Request *requestS,
                        MPI_Request *requestR
                         );
 
