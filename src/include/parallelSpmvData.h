@@ -26,5 +26,5 @@
     // end of creatinng communicator data//
 
     // request arrays for communication  - two per process (send/recv)
-    MPI_Request *requestS=NULL,*requestR=NULL;
+    MPI_Request *requestR=NULL;
 
