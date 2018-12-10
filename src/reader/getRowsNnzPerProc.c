@@ -3,8 +3,7 @@
 
 void getRowsNnzPerProc(int *rowsPP, int *nnzPP, const int *global_n, const int *global_nnz,  const int *row_Ptr) 
 {
-    int worldRank, worldSize;
-    MPI_Comm_rank(MPI_COMM_WORLD,&worldRank);
+    int worldSize;
     MPI_Comm_size(MPI_COMM_WORLD,&worldSize);
 
     float nnzIncre = (float ) *global_nnz/ (float) worldSize;
