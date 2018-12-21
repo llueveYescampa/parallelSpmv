@@ -53,9 +53,9 @@ int main(int argc, char *argv[])
     } // end if //
     MPI_Bcast(&exists,  1,MPI_CHAR,root,MPI_COMM_WORLD);
     if (exists == 'f') {
-       if (worldRank == root) printf("Quitting.....\n");
+        if (worldRank == root) printf("Quitting.....\n");
         MPI_Finalize();
-        exit(-1);
+        exit(0);
     } // end if //
     MPI_Bcast(&checkSol,1,MPI_CHAR,root,MPI_COMM_WORLD);
 
