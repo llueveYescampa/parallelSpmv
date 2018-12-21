@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
             exists='f';
         } // endif //
         
-        FILE *fh;
+        FILE *fh=NULL;
         // testing if matrix file exists
         if((fh = fopen(argv[1], "rb")  )   == NULL) {
             printf("No matrix file found.\n");
@@ -50,6 +50,7 @@ int main(int argc, char *argv[])
                 checkSol='t';
             } // end if //
         } // end if //
+        if (fh) fclose(fh);
     } // end if //
     MPI_Bcast(&exists,  1,MPI_CHAR,root,MPI_COMM_WORLD);
     if (exists == 'f') {
