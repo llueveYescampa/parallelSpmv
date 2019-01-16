@@ -79,11 +79,9 @@ void reader( int *n_global,
     
     if (worldRank == root) {
         offsetRowArry[0]=0;
-        for (int i=1; i<worldSize ; ++i) {
-            offsetRowArry[i] = offsetRowArry[i-1] +  rowsPP[i-1];   
-        } // end for //
         offsetColArry[0]=0;
         for (int i=1; i<worldSize ; ++i) {
+            offsetRowArry[i] = offsetRowArry[i-1] +  rowsPP[i-1];   
             offsetColArry[i] = offsetColArry[i-1] +   nnzPP[i-1];   
         } // end for //
     } // end if //
