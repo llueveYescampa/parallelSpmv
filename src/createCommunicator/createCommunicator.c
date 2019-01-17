@@ -5,6 +5,8 @@
 
 #include "parallelSpmv.h"
 
+int createColIdxMap(int **b,  int *a, const int *n);
+
 void createCommunicator(int *nColsOff,
                         int **recvCount,
                         int **sendCount,
