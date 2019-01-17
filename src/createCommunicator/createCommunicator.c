@@ -86,7 +86,7 @@ void createCommunicator(int *nColsOff,
             reciveColumns[process][i] = off_proc_column_map[k];
         } // end for //
     } // end for //
-    
+    free(off_proc_column_map);
     MPI_Waitall(worldSize,requestR,MPI_STATUS_IGNORE);
     MPI_Waitall(worldSize,requestS,MPI_STATUS_IGNORE);
 
