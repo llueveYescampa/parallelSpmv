@@ -18,7 +18,7 @@ void startComunication(real *x_ptr,
     MPI_Comm_rank(MPI_COMM_WORLD,&worldRank);
     MPI_Comm_size(MPI_COMM_WORLD,&worldSize);
     
-    for (int process=0,indx=0, s=0; process < worldSize; indx += recvCount[process++] ) {
+    for (int process=0, s=0; process < worldSize; process++ ) {
         // need to compress data to send inside compressedVec
         if (sendCount[process] > 0) {                   // need to send to process j
             for (int i=0;  i<sendCount[process]; ++i) {
