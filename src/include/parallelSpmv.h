@@ -25,4 +25,4 @@ void startComunication(real *v,
                        MPI_Request *requestR
                         );
 
-void spmv(real *b, real *__restrict__ val, real *x, int *row_ptr, int *col_idx, int nRows);                         
+void spmv(real *__restrict__ b, const real *__restrict__ val, const real *x, const int *row_ptr, const int *col_idx, int nRows);                     
