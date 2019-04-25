@@ -119,7 +119,7 @@ int main(int argc, char *argv[])
     elapsed_time += MPI_Wtime();
 
     if (worldRank == root) {
-        printf("---> Time taken by %d processes: %g seconds\n",worldSize, elapsed_time);
+        printf("---> Time taken by %d processes: %g seconds, GFLOPS: %f\n",worldSize, elapsed_time, 2.0*nnz_global*REP*1.0e-9/elapsed_time);
     } // end if //
     
     
