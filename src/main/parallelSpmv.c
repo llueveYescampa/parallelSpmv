@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     MPI_Comm_size(MPI_COMM_WORLD,&worldSize);
     
     #include "parallelSpmvData.h"
+    real alpha = 1.0, beta = 0.0;
 
     // verifing number of input parameters //
    char exists='t';
@@ -98,12 +99,12 @@ int main(int argc, char *argv[])
     
     for (int t=0; t<REP; ++t) {
         // cleaning solution vector //
-        for(int i=0; i<n; ++i) w[i] = 0.0;
+        //for(int i=0; i<n; ++i) w[i] = (real)0.0;
 
         startComunication(v,v_off,compressedVec,recvCount, sendCount, sendColumns, requestS,requestR);
 
         // solving the on_proc part while comunication is taken place.
-        spmv(w,val,v, row_ptr,col_idx,n);
+        spmv(w,val,v, row_ptr,col_idx,n,alpha,beta);
         
         // waitting for the comunication to finish
         MPI_Waitall(countS, requestS,MPI_STATUS_IGNORE);
@@ -111,7 +112,7 @@ int main(int argc, char *argv[])
         
         // now is time to solve the off_proc part
         if (nColsOff > 0) {
-            spmv(w,val_off,v_off, row_ptr_off,col_idx_off,n);
+            spmv(w,val_off,v_off, row_ptr_off,col_idx_off,n,alpha,1.0);
         } // end if//
         MPI_Barrier(MPI_COMM_WORLD);
     } // end for //
@@ -119,7 +120,7 @@ int main(int argc, char *argv[])
     elapsed_time += MPI_Wtime();
 
     if (worldRank == root) {
-        printf("---> Time taken by %d processes: %g seconds, GFLOPS: %f\n",worldSize, elapsed_time, 2.0*nnz_global*REP*1.0e-9/elapsed_time);
+        printf("---> Time taken by %d processes: %g seconds, GFLOPS: %f\n",worldSize, elapsed_time, (2.0*nnz_global+3.0*n_global)*REP*1.0e-9/elapsed_time);
     } // end if //
     
     
