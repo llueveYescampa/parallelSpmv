@@ -15,7 +15,9 @@ if (CMAKE_C_COMPILER_ID STREQUAL "GNU" )
     #set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -Wextra -Wno-unused-result -Wno-unused-parameter -ftree-vectorize -fopt-info -ffast-math ")
     #set(CMAKE_EXE_LINKER_FLAGS "-lm" )
 elseif ( CMAKE_C_COMPILER_ID STREQUAL "Intel" )
-    set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -qopt-report=3 -qopt-report-phase=vec -xCORE-AVX2")
+    set(CMAKE_C_COMPILER "icx")
+    set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -fvectorize  -qopt-report-file=stderr -qopt-report=max  -xCORE-AVX2")
+    #set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -qopt-report=3 -qopt-report-phase=vec -xCORE-AVX2")
     #set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Wall -qopt-report=3 -qopt-report-phase=vec ")
 elseif ( CMAKE_C_COMPILER_ID STREQUAL "NVHPC" )
     set(CMAKE_C_FLAGS  "${CMAKE_C_FLAGS} -Minform=inform  -Mnodepchk -Minfo=all -Mvect=simd ")
@@ -44,5 +46,3 @@ target_link_libraries(parallelSpmvAlphaBeta ${MPI_LIBRARIES} ${CMAKE_EXE_LINKER_
 #MESSAGE( STATUS "CMAKE_C_FLAGS: "               ${CMAKE_C_FLAGS} )
 #MESSAGE( STATUS "CMAKE_CURRENT_SOURCE_DIR: "    ${CMAKE_CURRENT_SOURCE_DIR} )
 ########### end of Debug messages #################
-
-
